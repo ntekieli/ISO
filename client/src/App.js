@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import ListingForm from './ListingForm';
+import ItemListing from './ItemListing';
 
 function App() {
+  const [itemListings, setItemListings] = useState([]);
+
+  const handleFormSubmit = (newItem) => {
+    // Update the state with the new item
+    setItemListings((prevListings) => [...prevListings, newItem]);
+  }; 
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ListingForm onSubmit={handleFormSubmit} />
+      {itemListings.map((item) => (
+        <ItemListing key={item.id} {...item} />
+        ))}
     </div>
   );
 }
