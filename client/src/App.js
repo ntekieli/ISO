@@ -46,6 +46,7 @@ function App() {
 
   return (
     <div className="App">
+      <p>Hello World</p>
       <ListingForm onSubmit={handleFormSubmit} />
       {itemListings.map((item) => (
         <ItemListing key={item.id} {...item} onDelete={() => handleDelete(item.id)} />
