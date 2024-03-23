@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ItemListing = ({ id, itemName, user, tags }) => {
+const ItemListing = ({ id, itemName, user, tags, onDelete }) => {
   return (
     <div>
       <h3>{itemName}</h3>
@@ -12,6 +12,7 @@ const ItemListing = ({ id, itemName, user, tags }) => {
           ))}
         </ul>
       )}
+      <button onClick={() => onDelete(id)}>DELETE</button>
     </div>
   );
 };
