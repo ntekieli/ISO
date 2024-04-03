@@ -2,23 +2,38 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import ListingForm from './ListingForm';
 import ItemListing from './ItemListing';
+import { ThemeProvider, createTheme } from '@mui/material';
 
-
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#ff0000',
+    },
+    secondary: {
+      main: '#00ff00',
+    },
+  },
+});
 
 function App() {
-  const [itemListings, setItemListings] = useState('http://localhost:3000');
+  const [itemListings, setItemListings] = useState([]);
 
   useEffect(() => {
-    fetch('/posts')
+    fetch(`http://localhost:3000/posts`)
     .then(response => response.json())
     .then(data => {
-      setItemListings(data);
+      if (Array.isArray(data)) {
+        setItemListings(data);
+        console.log('Data:', data);
+      } else {
+        console.error('Data is not an array:', data);
+      }
     })
     .catch(error => console.error('Error fetching posts', error));
   }, []);
 
   const handleFormSubmit = (newItem) => {
-    fetch('/posts', {
+    fetch(`http://localhost:3000/posts`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -34,7 +49,7 @@ function App() {
   };
 
   const handleDelete = (id) => {
-    fetch(`/posts/${id}`, {
+    fetch(`http://localhost:3000/posts${id}`, {
       method: 'DELETE',
     })
     .then(() => {
@@ -45,13 +60,15 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <p>Hello World</p>
-      <ListingForm onSubmit={handleFormSubmit} />
-      {itemListings.map((item) => (
-        <ItemListing key={item.id} {...item} onDelete={() => handleDelete(item.id)} />
-        ))}
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <p>Hello World</p>
+        <ListingForm onSubmit={handleFormSubmit} />
+        {itemListings.map((item) => (
+          <ItemListing key={item.id} {...item} onDelete={() => handleDelete(item.id)} />
+          ))}
+      </div>
+    </ThemeProvider>
   );
 }
 

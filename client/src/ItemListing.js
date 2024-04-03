@@ -1,10 +1,8 @@
 // ItemListing.js
 import React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+import { Card, CardContent, Typography } from '@mui/material';
 
-const ItemListing = ({ id, itemName, user, tags, onDelete }) => {
+const ItemListing = ({ id, itemName, user, tags = [], onDelete }) => {
   return (
     <Card>
       <CardContent>
@@ -21,6 +19,7 @@ const ItemListing = ({ id, itemName, user, tags, onDelete }) => {
             </ul>
           </div>
         )}
+        <button onClick={onDelete}>Delete</button>
       </CardContent>
     </Card>
   );
