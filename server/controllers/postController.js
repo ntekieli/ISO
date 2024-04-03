@@ -22,6 +22,16 @@ const getPost = async (req, res) => {
     }
 };
 
+const getAllPosts = async (req, res) => {
+    try {
+        const { page = 1, limit = 10 } = req.query;
+        const posts = await Post.find().limit(limit * 1).skip((page - 1) * limit);
+        res.json(posts);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
 const updatePost = async (req, res) => {
     try {
         const post = await Post.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -46,4 +56,4 @@ const deletePost = async (req, res) => {
     }
 };
 
-export { createPost, getPost, updatePost, deletePost };
+export { createPost, getPost, getAllPosts, updatePost, deletePost };
