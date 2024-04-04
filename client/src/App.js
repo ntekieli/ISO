@@ -3,6 +3,7 @@ import './App.css';
 import ListingForm from './ListingForm';
 import ItemListing from './ItemListing';
 import { ThemeProvider, createTheme } from '@mui/material';
+import Container from '@mui/material/Container';
 
 const theme = createTheme({
   palette: {
@@ -67,13 +68,14 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
-        <p>Hello World</p>
-        <ListingForm onSubmit={handleFormSubmit} />
-        {itemListings.map((item) => (
-          <ItemListing key={item.id} {...item} onDelete={() => handleDelete(item.id)} />
+      <Container maxWidth="md" sx={{ padding: '20px' }}>
+        <div className="App">
+          <ListingForm onSubmit={handleFormSubmit} />
+          {itemListings.map((item) => (
+            <ItemListing key={item.id} {...item} onDelete={() => handleDelete(item.id)} />
           ))}
-      </div>
+        </div>
+      </Container>
     </ThemeProvider>
   );
 }
