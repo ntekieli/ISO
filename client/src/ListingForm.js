@@ -1,5 +1,6 @@
 // ItemForm.js
 import React, { useState } from 'react';
+import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -45,20 +46,28 @@ const ItemForm = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-        <TextField
-          label="Item Name"
-          type="text"
-          value = {itemName}
-          onChange={(e) => setItemName(e.target.value)}
-        />
-        <TextField
-          label="User"
-          type="text"
-          value = {user}
-          onChange={(e) => setUser(e.target.value)}
-        />
-        <FormGroup>
-        <FormLabel>Tags:</FormLabel>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <TextField
+            required
+            label="Item Name"
+            type="text"
+            value={itemName}
+            onChange={(e) => setItemName(e.target.value)}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            required
+            label="User"
+            type="text"
+            value={user}
+            onChange={(e) => setUser(e.target.value)}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <FormGroup>
+            <FormLabel>Tags:</FormLabel>
           <FormControlLabel
             control={<Checkbox checked={tags.tag1} onChange={() => handleTagChange('tag1')} />}
             label="Tag 1"
@@ -71,13 +80,16 @@ const ItemForm = ({ onSubmit }) => {
             control={<Checkbox checked={tags.tag3} onChange={() => handleTagChange('tag3')} />}
             label="Tag 3"
           />
-        </FormGroup>
-        
-        <Button type="submit" variant="contained" color="primary">
+          </FormGroup>
+      </Grid>
+      <Grid item xs={12}>
+        <Button type="submit" variant="contained" color="primary" hover>
           Create Item Listing
         </Button>
-    </form>
-  );
+      </Grid>
+    </Grid>
+  </form>
+);
 };
 
 export default ItemForm;

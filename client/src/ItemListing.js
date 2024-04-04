@@ -1,6 +1,7 @@
 // ItemListing.js
 import React from 'react';
 import { Card, CardContent, Typography } from '@mui/material';
+import { List, ListItem, Button } from '@mui/material';
 
 const ItemListing = ({ id, itemName, user, tags = [], onDelete }) => {
   return (
@@ -12,14 +13,16 @@ const ItemListing = ({ id, itemName, user, tags = [], onDelete }) => {
         {tags.length > 0 && (
           <div>
             <Typography variant="subtitle1">Tags:</Typography>
-            <ul>
+            <List>
               {tags.map((tag, index) => (
-                <li key={index}>{tag}</li>
+                <ListItem key={index}>{tag}</ListItem>
               ))}
-            </ul>
+            </List>
           </div>
         )}
-        <button onClick={onDelete}>Delete</button>
+        <Button variant="contained" color="secondary" onClick={onDelete} hover>
+          Delete
+        </Button>
       </CardContent>
     </Card>
   );
