@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import ListingForm from './ListingForm';
-import ItemListing from './ItemListing';
+import {ItemListing, ItemStack} from './ItemListing';
 import { ThemeProvider, createTheme } from '@mui/material';
 import Container from '@mui/material/Container';
+
 
 const theme = createTheme({
   palette: {
@@ -71,9 +72,7 @@ function App() {
       <Container maxWidth="md" sx={{ padding: '20px' }}>
         <div className="App">
           <ListingForm onSubmit={handleFormSubmit} />
-          {itemListings.map((item) => (
-            <ItemListing key={item.id} {...item} onDelete={() => handleDelete(item.id)} />
-          ))}
+          <ItemStack items={itemListings} onDelete={handleDelete} />
         </div>
       </Container>
     </ThemeProvider>

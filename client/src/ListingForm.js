@@ -1,6 +1,7 @@
 // ItemForm.js
 import React, { useState } from 'react';
 import Grid from '@mui/material/Grid';
+import { Container } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -8,6 +9,7 @@ import Button from '@mui/material/Button';
 import FormGroup from '@mui/material/FormGroup';
 // import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import Tag from './ItemTag';
 
 const ItemForm = ({ onSubmit }) => {
   const [itemName, setItemName] = useState('');
@@ -45,51 +47,47 @@ const ItemForm = ({ onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <TextField
-            required
-            label="Item Name"
-            type="text"
-            value={itemName}
-            onChange={(e) => setItemName(e.target.value)}
-          />
+    <Container maxWidth="sm">
+      <form onSubmit={handleSubmit}>
+        <Grid container spacing={2} alignItems="center" justifyContent="center">
+          <Grid item xs={12} sm={4}>
+            <TextField
+              required
+              label="Item Name"
+              type="text"
+              value={itemName}
+              onChange={(e) => setItemName(e.target.value)}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <TextField
+              required
+              label="User"
+              type="text"
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            <FormGroup>
+              <FormLabel>Tags:</FormLabel>
+              <Tag label="Tag 1" checked={tags.tag1} onChange={() => handleTagChange('tag1')} />
+              <Tag label="Tag 2" checked={tags.tag2} onChange={() => handleTagChange('tag2')} />
+              <Tag label="Tag 3" checked={tags.tag3} onChange={() => handleTagChange('tag3')} />
+            </FormGroup>
+          </Grid>
+          <Grid item xs={12}>
+            <Button type="submit" variant="contained" color="primary" fullWidth>
+              Create Item Listing
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <TextField
-            required
-            label="User"
-            type="text"
-            value={user}
-            onChange={(e) => setUser(e.target.value)}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <FormGroup>
-            <FormLabel>Tags:</FormLabel>
-          <FormControlLabel
-            control={<Checkbox checked={tags.tag1} onChange={() => handleTagChange('tag1')} />}
-            label="Tag 1"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={tags.tag2} onChange={() => handleTagChange('tag2')} />}
-            label="Tag 2"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={tags.tag3} onChange={() => handleTagChange('tag3')} />}
-            label="Tag 3"
-          />
-          </FormGroup>
-      </Grid>
-      <Grid item xs={12}>
-        <Button type="submit" variant="contained" color="primary" hover>
-          Create Item Listing
-        </Button>
-      </Grid>
-    </Grid>
-  </form>
-);
+      </form>
+    </Container>
+  );
 };
+  
 
 export default ItemForm;

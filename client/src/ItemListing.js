@@ -2,6 +2,24 @@
 import React from 'react';
 import { Card, CardContent, Typography } from '@mui/material';
 import { List, ListItem, Button } from '@mui/material';
+import Stack from '@mui/material/Stack';
+
+const ItemStack = ({ items, onDelete }) => {
+  return (
+    <Stack spacing={2}>
+      {items.map((item) => (
+        <ItemListing
+          key={item.id}
+          id={item.id}
+          itemName={item.itemName}
+          user={item.user}
+          tags={item.tags}
+          onDelete={() => onDelete(item.id)}
+        />
+      ))}
+    </Stack>
+  );
+};
 
 const ItemListing = ({ id, itemName, user, tags = [], onDelete }) => {
   return (
@@ -28,4 +46,4 @@ const ItemListing = ({ id, itemName, user, tags = [], onDelete }) => {
   );
 };
 
-export default ItemListing;
+export {ItemListing, ItemStack};
