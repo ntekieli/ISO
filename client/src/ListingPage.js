@@ -1,0 +1,60 @@
+import React, { useState, useEffect } from 'react';
+import ListingForm from './components/ListingForm.js';
+import { ItemStack } from './components/ItemListing.js';
+import { Container } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+function ListingPage() {
+    const [itemListings, setItemListings] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:3000/posts')
+            .then(response => response.json())
+            .then(data => {
+                if (Array.isArray(data)) {
+                    setItemListings(data);
+                } else {
+                    console.error('Data is not an array:', data);
+                }
+            })
+            .catch(error => console.error('Error fetching posts', error));
+    }, []);
+
+    const handleFormSubmit = (newItem) => {
+        fetch('http://localhost:3000/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newItem),
+        })
+            .then(response => response.json())
+            .then(data => {
+                setItemListings(prevListings => [...prevListings, data]);
+            })
+            .catch(error => console.error('Error adding new post:', error));
+    };
+
+    const handleDelete = (id) => {
+        fetch(`http://localhost:3000/posts/${id}`, {
+            method: 'DELETE',
+        })
+            .then(() => {
+                setItemListings(prevListings =>
+                    prevListings.filter(item => item._id !== id)
+                );
+            })
+            .catch(error => console.error('Error deleting post:', error));
+    };
+
+    return (
+        <Container style={{ padding: '20px' }}> {/* Adjusted styling for bootstrap */}
+            <div className="App">
+                <ListingForm onSubmit={handleFormSubmit} />
+                <ItemStack items={itemListings} onDelete={handleDelete} />
+            </div>
+        </Container>
+    );
+}
+
+export default ListingPage;

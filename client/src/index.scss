@@ -1,0 +1,133 @@
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+// colors
+$celadon-50: #f2fbf2;
+$celadon-100: #e1f7e1;
+$celadon-200: #c5eec4;
+$celadon-300: #aae5a9;
+$celadon-400: #61c860;
+$celadon-500: #3dac3b;
+$celadon-600: #2b8e2b;
+$celadon-700: #257025;
+$celadon-800: #225922;
+$celadon-900: #1d4a1e;
+$celadon-950: #0b280c;
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+/* Navigation styles */
+
+
+
+.nav {
+  background-color: $celadon-300;
+  /* color: #fff; */
+  padding: 10px;
+}
+
+
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+
+
+.Navbar {
+  color: $celadon-300;
+  padding: 10px;
+}
+
+.navbar-brand {
+  padding: 0 1rem 0 1rem;
+  background-color: $celadon-100;
+  border-radius: 7%;
+  margin: 0 0.5rem 0 0.5rem;
+  -webkit-text-fill-color: $celadon-800;
+}
+
+.bg-body-four {
+  background-color: $celadon-300;
+  justify-self: flex-end;
+}
+
+.navbar-expand .navbar-nav .nav-link {
+  padding: 0 1rem 0 1rem;
+  background-color: $celadon-100;
+  border-radius: 15%;
+  margin: 0 0.5rem 0 0.5rem;
+  -webkit-text-fill-color: $celadon-800;
+  :hover {
+    background-color: $celadon-500;
+  }
+}
+
+.delete_b_post {
+  background-color: $celadon-950;
+}
+
+.form-create-post-b {
+  background-color: $celadon-100;
+  padding: 10px;
+  align-content: center;
+  width: max-content;
+
+}
+
+
+/* Form styles */
+form {
+  margin: 20px 0;
+}
+
+form input,
+form textarea {
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+}
+
+/* Listing styles */
+.item-listing {
+  border: 1px solid #ccc;
+  margin: 20px 0;
+  padding: 10px;
+}
+
+.item-tag {
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.tags-container {
+  display: flex;      
+  flex-wrap: wrap;      
+  gap: 10px;            
+  align-items: center; 
+  width: 100%;         
+  padding: 10px;        
+  justify-content: space-evenly;
+}
+.form-label {
+  display: block; 
+  text-align: center;
+}
+
+
+
+/*# sourceMappingURL=index.scss.map */
