@@ -5,15 +5,14 @@ function AuthPage() {
     const [password, setPassword] = useState('');
     const [isNewUser, setIsNewUser] = useState(false);
     const [additionalInfo, setAdditionalInfo] = useState({
-        username: '',
-        address: ''
+        username: ''
     });
 
     const handleEmailPasswordSubmit = async (e) => {
         e.preventDefault();
         if (!isNewUser) {
             try {
-                const response = await fetch('http://localhost:3000/users/login', {
+                const response = await fetch(`${process.env.REACT_APP_ISO_API}/users/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -41,9 +40,9 @@ function AuthPage() {
     };
 
     const handleSignup = async () => {
-        const userData = { email, password, username: additionalInfo.username, address: additionalInfo.address };
+        const userData = { email, password, username: additionalInfo.username };
         try {
-            const response = await fetch('http://localhost:3000/register', {
+            const response = await fetch(`${process.env.REACT_APP_ISO_API}/users/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -89,13 +88,6 @@ function AuthPage() {
                             placeholder="Username"
                             value={additionalInfo.username}
                             onChange={(e) => setAdditionalInfo({ ...additionalInfo, username: e.target.value })}
-                            required
-                        />
-                        <input
-                            type="text"
-                            placeholder="Address"
-                            value={additionalInfo.address}
-                            onChange={(e) => setAdditionalInfo({ ...additionalInfo, address: e.target.value })}
                             required
                         />
                         <button type="submit">Sign Up</button>

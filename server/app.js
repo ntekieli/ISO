@@ -3,7 +3,9 @@ import { connect } from 'mongoose';
 import postRoutes from './routes/posts.js';
 import userRoutes from './routes/users.js';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
+dotenv.config();
 
 const app = express();
 app.use(cors());

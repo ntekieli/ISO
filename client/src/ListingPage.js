@@ -8,7 +8,7 @@ function ListingPage() {
     const [itemListings, setItemListings] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/posts')
+        fetch(`${process.env.REACT_APP_ISO_API}/posts`)
             .then(response => response.json())
             .then(data => {
                 if (Array.isArray(data)) {
@@ -21,7 +21,7 @@ function ListingPage() {
     }, []);
 
     const handleFormSubmit = (newItem) => {
-        fetch('http://localhost:3000/posts', {
+        fetch(`${process.env.REACT_APP_ISO_API}/posts`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ function ListingPage() {
     };
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:3000/posts/${id}`, {
+        fetch(`${process.env.REACT_APP_ISO_API}/posts/${id}`, {
             method: 'DELETE',
         })
             .then(() => {

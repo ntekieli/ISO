@@ -2,6 +2,8 @@ import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+const JWT_SECRET = 'abc';
+
 const registerUser = async (req, res) => {
     try {
         const { username, email, password } = req.body;
@@ -11,7 +13,7 @@ const registerUser = async (req, res) => {
         }
         const user = new User({ username, email, password });
         await user.save();
-        const token = jwt.sign({ id: user._id }, 'secret_key', { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
         res.status(201).json({ user: { username, email }, token });
     } catch (error) {
         res.status(400).json({ error: error.message });
